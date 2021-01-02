@@ -1,11 +1,16 @@
 package com.company;
 
 
+import com.company.gui.Gui;
+
+import javax.swing.*;
+import java.awt.*;
 
 public class Main {
 
     public static void main(String[] args) {
 
+        /*
         // ID d'une action
         int symbolZoneBourse = 23365019;
 
@@ -22,6 +27,16 @@ public class Main {
 
         JsonParser RecupUrl = new JsonParser();
         RecupUrl.addHistory(url);
+         */
+
+        JFrame frame = new JFrame("HE-Trade");
+        frame.setContentPane(new Gui().jp_main);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setPreferredSize(new Dimension(400, 400));
+        frame.pack();
+        frame.setVisible(true);
     }
-    //test commit Artur
+
+
+
 }
