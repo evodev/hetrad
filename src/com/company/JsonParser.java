@@ -14,18 +14,14 @@ import java.net.URLConnection;
 import java.sql.Timestamp;
 import java.util.Date;
 
-import com.company.business.GoodPriceSummary;
-
-
 public class JsonParser {
 
     public JsonParser () {
-
     }
-
 
     public void addHistory(String pUrl) {
         JSONParser parser = new JSONParser();
+        ReportGeneratorArrayList reportGeneratorArrayList = new ReportGeneratorArrayList();
 
 
         try {
@@ -65,16 +61,7 @@ public class JsonParser {
                 Timestamp stamp = new Timestamp(time);
                 Date date = new Date(stamp.getTime());
 
-                GoodPriceSummary goodPriceSummary = new GoodPriceSummary();
-                goodPriceSummary.setTime(date);
-                goodPriceSummary.setClosePrice(closePrice.floatValue());
-                goodPriceSummary.setHighestPrice(highestPrice.floatValue());
-                goodPriceSummary.setLowestPrice(lowestPrice.floatValue());
-                goodPriceSummary.setOpenPrice(openPrice.floatValue());
-                goodPriceSummary.setVolume(volume.floatValue());
-
-
-                System.out.println(goodPriceSummary.toString());
+                reportGeneratorArrayList.addGoodPriceToArrayList(date, volume.floatValue(), highestPrice.floatValue(), lowestPrice.floatValue(), openPrice.floatValue(), closePrice.floatValue());
 
             }
 

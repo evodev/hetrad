@@ -39,7 +39,7 @@
               <grid row="10" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="Prix d'ouverture"/>
+              <text value="Prix d'ouverture en Oz"/>
             </properties>
           </component>
           <component id="db1f2" class="javax.swing.JLabel">
@@ -47,7 +47,7 @@
               <grid row="11" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="Prix de fermeture"/>
+              <text value="Prix de fermeture en Oz"/>
             </properties>
           </component>
           <component id="66270" class="javax.swing.JLabel">
@@ -55,7 +55,7 @@
               <grid row="12" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="Prix le plus haut"/>
+              <text value="Prix le plus haut en Oz"/>
             </properties>
           </component>
           <component id="2daca" class="javax.swing.JLabel">
@@ -63,7 +63,7 @@
               <grid row="13" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="Prix le plus bas"/>
+              <text value="Prix le plus bas en Oz"/>
             </properties>
           </component>
           <component id="94ae2" class="javax.swing.JLabel" binding="jl_open">
@@ -231,6 +231,30 @@
             </constraints>
             <properties>
               <text value="URL"/>
+            </properties>
+          </component>
+          <component id="84224" class="javax.swing.JLabel" binding="jl_close">
+            <constraints>
+              <grid row="11" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value=""/>
+            </properties>
+          </component>
+          <component id="e34ea" class="javax.swing.JLabel" binding="jl_highest">
+            <constraints>
+              <grid row="12" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value=""/>
+            </properties>
+          </component>
+          <component id="32bce" class="javax.swing.JLabel" binding="jl_lowest">
+            <constraints>
+              <grid row="13" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value=""/>
             </properties>
           </component>
         </children>

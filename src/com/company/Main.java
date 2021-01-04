@@ -35,6 +35,7 @@ public class Main {
         frame.setPreferredSize(new Dimension(400, 400));
         frame.pack();
         frame.setVisible(true);
+
     }
 
 

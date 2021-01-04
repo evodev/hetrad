@@ -1,6 +1,7 @@
 package com.company.gui;
 
 import com.company.JsonParser;
+import com.company.ReportGeneratorArrayList;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,6 +26,9 @@ public class Gui {
     private JLabel jl_time_end;
     private JComboBox cb_goods;
     private JLabel jl_url;
+    private JLabel jl_close;
+    private JLabel jl_highest;
+    private JLabel jl_lowest;
     public int goodCode;
     public String dateStart;
     public String dateEnd;
@@ -59,7 +63,6 @@ public class Gui {
         bt_bouton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                jl_open.setText("nouveau prix");
                 long millisecondsStart = 0, millisecondsEnd = 0;
 
                 // dates de début et fin en String
@@ -101,6 +104,11 @@ public class Gui {
                 JsonParser RecupUrl = new JsonParser();
                 RecupUrl.addHistory(url);
 
+                jl_open.setText(String.valueOf(ReportGeneratorArrayList.getOpen()));
+                jl_close.setText(String.valueOf(ReportGeneratorArrayList.getClose()));
+                //jl_highest.setText(String.valueOf(ReportGeneratorArrayList.getOpen()));
+                //jl_lowest.setText(String.valueOf(ReportGeneratorArrayList.getOpen()));
+
             }
         });
         cb_goods.addActionListener(new ActionListener() {
@@ -110,8 +118,8 @@ public class Gui {
                 JComboBox cb = (JComboBox)e.getSource();
                 String good = (String)cb.getSelectedItem();
                 switch (good){
-                    case "Gold": jl_idGood.setText(String.valueOf(23365019));
-                        goodCode = (23365019);
+                    case "Gold": jl_idGood.setText(String.valueOf(4947));
+                        goodCode = (4947);
                         break;
                     case "Silver": jl_idGood.setText(String.valueOf(888888));
                         goodCode = (888888);
