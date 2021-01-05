@@ -15,11 +15,10 @@ public class ReportGeneratorArrayList {
         goodPrices = new ArrayList<>();
     }
 
-    public void addGoodPriceToArrayList(Date date, float volume, float highestPrice, float lowestPrice, float openPrice, float closePrice) {
+    public void addGoodPrice(Date date, float volume, float highestPrice, float lowestPrice, float openPrice, float closePrice) {
 
         GoodPriceSummary goodPrice = new GoodPriceSummary(date, volume, highestPrice, lowestPrice, openPrice, closePrice);
         goodPrices.add(goodPrice);
-
     }
 
     public static float getOpen() {

@@ -5,6 +5,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -22,7 +23,7 @@ public class JsonParser {
     public void addHistory(String pUrl) {
         JSONParser parser = new JSONParser();
         ReportGeneratorArrayList reportGeneratorArrayList = new ReportGeneratorArrayList();
-
+        ReportGeneratorHashMap reportGeneratorHashMap = new ReportGeneratorHashMap();
 
         try {
             // récupération URL de l'API
@@ -44,21 +45,6 @@ public class JsonParser {
             JSONArray openPrices = (JSONArray) jsonObject.get("o");
             JSONArray closePrices = (JSONArray) jsonObject.get("c");
 
-    /*
-            //mettre les données dans une ArrayList
-            Object[][] array = new Object[closePrices.size()][6];
-            for (int i= 0; i <closePrices.size(); i++){
-                array[i][0] = (Long) times.get(i);
-                array[i][1] = (long) volumes.get(i);
-                array[i][2] = (double) highestPrices.get(i);
-                array[i][3] = (double) lowestPrices.get(i);
-                array[i][4] = (double) openPrices.get(i);
-                array[i][5] = (double) closePrices.get(i);
-            }
-
-     */
-
-
             // boucle pour chaque "ligne" des données récupérées
             for(int i=0;i<closePrices.size();i++){
                 Long time = (Long) times.get(i);
@@ -68,19 +54,19 @@ public class JsonParser {
                 Double openPrice = toDouble(openPrices.get(i));
                 Double closePrice = toDouble(openPrices.get(i));
 
-
                 // timestamp 0 = 01.01.1970 à 00h00 00second
                 // timestamp 1 = 01.01.1970 à 00h00 01second
                 time = time * 1000; //car Timestamp prend en compte les millisecondes également
                 Timestamp stamp = new Timestamp(time);
                 Date date = new Date(stamp.getTime());
 
-                reportGeneratorArrayList.addGoodPriceToArrayList(date, volume.floatValue(), highestPrice.floatValue(), lowestPrice.floatValue(), openPrice.floatValue(), closePrice.floatValue());
-
-
+                reportGeneratorHashMap.addGoodPrice(date, volume.floatValue(), highestPrice.floatValue(), lowestPrice.floatValue(), openPrice.floatValue(), closePrice.floatValue());
+                //reportGeneratorArrayList.addGoodPrice(date, volume.floatValue(), highestPrice.floatValue(), lowestPrice.floatValue(), openPrice.floatValue(), closePrice.floatValue());
             }
 
         in.close();
+        } catch(NullPointerException e) {
+            JOptionPane.showMessageDialog(null, "Données non disponibles pour les dates sélectionnées");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {

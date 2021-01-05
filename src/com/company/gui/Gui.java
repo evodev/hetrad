@@ -2,6 +2,8 @@ package com.company.gui;
 
 import com.company.JsonParser;
 import com.company.ReportGeneratorArrayList;
+import com.company.ReportGeneratorArrayList;
+import com.company.ReportGeneratorHashMap;
 
 import javax.swing.*;
 import java.awt.*;
@@ -30,7 +32,7 @@ public class Gui {
     private JLabel jl_highest;
     private JLabel jl_lowest;
     private JLabel jl_lignes;
-    public int goodCode;
+    public int goodCode = 4947; // par défaut le code de l'or est sélectionné
     public String dateStart;
     public String dateEnd;
 
@@ -48,7 +50,7 @@ public class Gui {
             cb_day_end.addItem(day);
         }
         // peupler liste des années
-        for (int i = 1989; i <= 2021; i++){
+        for (int i = 1995; i <= 2021; i++){
             String year = String.valueOf(i);
             cb_year_start.addItem(year);
             cb_year_end.addItem(year);
@@ -85,33 +87,38 @@ public class Gui {
                     millisecondsEnd = millisecondsEnd/1000;
                     jl_time_end.setText(String.valueOf(millisecondsEnd));
 
-                    //tester si valeur date de début est bien avant date de fin
-                    if (millisecondsEnd < millisecondsStart){
-                        JOptionPane.showMessageDialog(null, "La date de début doit se trouver avant la date de fin");
-                    }
-
-
                 }catch (ParseException x){
                     x.printStackTrace();
                 }
 
-                //message bouton
-                JOptionPane.showMessageDialog(null, "Date de début  " + dateStart);
+                //tester si valeur date de début est bien avant date de fin
+                if (millisecondsEnd < millisecondsStart){
+                    JOptionPane.showMessageDialog(null, "La date de début doit se trouver avant la date de fin");
+                } else {
+                    //un interval de minimum trois jours est nécessaire entre les deux plages horaires
+                    if ((millisecondsEnd - millisecondsStart) < 172800){
+                        JOptionPane.showMessageDialog(null, "Un interval de minimum trois jours est nécessaire");
+                    } else {
+                        String url = "https://www.zonebourse.com/mods_a/charts/TV/function/history?from=" + millisecondsStart +
+                                "&to=" + millisecondsEnd + "&symbol=" + goodCode + "&resolution=D&requestType=GET&src=itfp";
 
-                String url = "https://www.zonebourse.com/mods_a/charts/TV/function/history?from=" + millisecondsStart +
-                        "&to=" + millisecondsEnd + "&symbol=" + goodCode + "&resolution=D&requestType=GET&src=itfp";
+                        //jl_url.setText(url);
 
-                //jl_url.setText(url);
+                        JsonParser RecupUrl = new JsonParser();
+                        RecupUrl.addHistory(url);
 
-                JsonParser RecupUrl = new JsonParser();
-                RecupUrl.addHistory(url);
+                    /*jl_open.setText(String.valueOf(ReportGeneratorArrayList.getOpen()));
+                    jl_close.setText(String.valueOf(ReportGeneratorArrayList.getClose()));
+                    jl_highest.setText(String.valueOf(ReportGeneratorArrayList.getHighest()));
+                    jl_lowest.setText(String.valueOf(ReportGeneratorArrayList.getLowest()));
+                    jl_lignes.setText(ReportGeneratorArrayList.goodPrices.size() + " lignes"); */
 
-                jl_open.setText(String.valueOf(ReportGeneratorArrayList.getOpen()));
-                jl_close.setText(String.valueOf(ReportGeneratorArrayList.getClose()));
-                jl_highest.setText(String.valueOf(ReportGeneratorArrayList.getHighest()));
-                jl_lowest.setText(String.valueOf(ReportGeneratorArrayList.getLowest()));
-                jl_lignes.setText(ReportGeneratorArrayList.goodPrices.size() + " lignes");
-
+                        jl_open.setText(String.valueOf(ReportGeneratorHashMap.getOpen()));
+                        jl_close.setText(String.valueOf(ReportGeneratorHashMap.getClose()));
+                        jl_highest.setText(String.valueOf(ReportGeneratorHashMap.getHighest()));
+                        jl_lowest.setText(String.valueOf(ReportGeneratorHashMap.getLowest()));
+                    }
+                }
             }
         });
         cb_goods.addActionListener(new ActionListener() {
