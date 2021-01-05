@@ -1,7 +1,5 @@
 package com.company.business;
 
-import com.company.ReportGeneratorHashMap;
-
 import java.util.Date;
 
 public class GoodPriceSummary {
@@ -12,11 +10,11 @@ public class GoodPriceSummary {
     private float openPrice;
     private float closePrice;
 
-    public GoodPriceSummary(){
+    public GoodPriceSummary() {
     }
 
-    public GoodPriceSummary(Date time, float volume, float highestPrice, float lowestPrice, float openPrice, float closePrice) {
-        this.time = time;
+    public GoodPriceSummary(Date date, float volume, float highestPrice, float lowestPrice, float openPrice, float closePrice) {
+        this.time = date;
         this.volume = volume;
         this.highestPrice = highestPrice;
         this.lowestPrice = lowestPrice;
@@ -83,5 +81,4 @@ public class GoodPriceSummary {
                 ", closePrice=" + closePrice +
                 '}';
     }
-
 }

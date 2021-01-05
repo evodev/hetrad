@@ -44,6 +44,20 @@ public class JsonParser {
             JSONArray openPrices = (JSONArray) jsonObject.get("o");
             JSONArray closePrices = (JSONArray) jsonObject.get("c");
 
+    /*
+            //mettre les données dans une ArrayList
+            Object[][] array = new Object[closePrices.size()][6];
+            for (int i= 0; i <closePrices.size(); i++){
+                array[i][0] = (Long) times.get(i);
+                array[i][1] = (long) volumes.get(i);
+                array[i][2] = (double) highestPrices.get(i);
+                array[i][3] = (double) lowestPrices.get(i);
+                array[i][4] = (double) openPrices.get(i);
+                array[i][5] = (double) closePrices.get(i);
+            }
+
+     */
+
 
             // boucle pour chaque "ligne" des données récupérées
             for(int i=0;i<closePrices.size();i++){
@@ -62,6 +76,7 @@ public class JsonParser {
                 Date date = new Date(stamp.getTime());
 
                 reportGeneratorArrayList.addGoodPriceToArrayList(date, volume.floatValue(), highestPrice.floatValue(), lowestPrice.floatValue(), openPrice.floatValue(), closePrice.floatValue());
+
 
             }
 

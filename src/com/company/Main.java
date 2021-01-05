@@ -32,7 +32,7 @@ public class Main {
         JFrame frame = new JFrame("HE-Trade");
         frame.setContentPane(new Gui().jp_main);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setPreferredSize(new Dimension(400, 400));
+        frame.setPreferredSize(new Dimension(400, 450));
         frame.pack();
         frame.setVisible(true);
 

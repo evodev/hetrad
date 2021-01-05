@@ -29,6 +29,7 @@ public class Gui {
     private JLabel jl_close;
     private JLabel jl_highest;
     private JLabel jl_lowest;
+    private JLabel jl_lignes;
     public int goodCode;
     public String dateStart;
     public String dateEnd;
@@ -38,6 +39,7 @@ public class Gui {
         cb_goods.addItem("Gold");
         cb_goods.addItem("Silver");
         cb_goods.addItem("Platinum");
+        cb_goods.addItem("Palladium");
 
         // peupler liste des jours
         for (int i = 1; i <= 31; i++){
@@ -106,8 +108,9 @@ public class Gui {
 
                 jl_open.setText(String.valueOf(ReportGeneratorArrayList.getOpen()));
                 jl_close.setText(String.valueOf(ReportGeneratorArrayList.getClose()));
-                //jl_highest.setText(String.valueOf(ReportGeneratorArrayList.getOpen()));
-                //jl_lowest.setText(String.valueOf(ReportGeneratorArrayList.getOpen()));
+                jl_highest.setText(String.valueOf(ReportGeneratorArrayList.getHighest()));
+                jl_lowest.setText(String.valueOf(ReportGeneratorArrayList.getLowest()));
+                jl_lignes.setText(ReportGeneratorArrayList.goodPrices.size() + " lignes");
 
             }
         });
@@ -121,11 +124,14 @@ public class Gui {
                     case "Gold": jl_idGood.setText(String.valueOf(4947));
                         goodCode = (4947);
                         break;
-                    case "Silver": jl_idGood.setText(String.valueOf(888888));
-                        goodCode = (888888);
+                    case "Silver": jl_idGood.setText(String.valueOf(16221));
+                        goodCode = (16221);
                         break;
-                    case "Platinum": jl_idGood.setText(String.valueOf(222222));
-                        goodCode = (222222);
+                    case "Platinum": jl_idGood.setText(String.valueOf(89083));
+                        goodCode = (89083);
+                        break;
+                    case "Palladium": jl_idGood.setText(String.valueOf(89084));
+                        goodCode = (89084);
                         break;
                 }
             }
