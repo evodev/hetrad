@@ -4,6 +4,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import com.company.gui.Gui;
 
 import javax.swing.*;
 import java.io.BufferedReader;
@@ -20,7 +21,7 @@ public class JsonParser {
     public JsonParser () {
     }
 
-    public void addHistory(String pUrl) {
+    public void addHistory(String pUrl, boolean choix) {
         JSONParser parser = new JSONParser();
         ReportGeneratorArrayList reportGeneratorArrayList = new ReportGeneratorArrayList();
         ReportGeneratorHashMap reportGeneratorHashMap = new ReportGeneratorHashMap();
@@ -60,8 +61,11 @@ public class JsonParser {
                 Timestamp stamp = new Timestamp(time);
                 Date date = new Date(stamp.getTime());
 
-                reportGeneratorHashMap.addGoodPrice(date, volume.floatValue(), highestPrice.floatValue(), lowestPrice.floatValue(), openPrice.floatValue(), closePrice.floatValue());
-                //reportGeneratorArrayList.addGoodPrice(date, volume.floatValue(), highestPrice.floatValue(), lowestPrice.floatValue(), openPrice.floatValue(), closePrice.floatValue());
+                if (choix){
+                    reportGeneratorArrayList.addGoodPrice(date, volume.floatValue(), highestPrice.floatValue(), lowestPrice.floatValue(), openPrice.floatValue(), closePrice.floatValue());
+                }else{
+                    reportGeneratorHashMap.addGoodPrice(date, volume.floatValue(), highestPrice.floatValue(), lowestPrice.floatValue(), openPrice.floatValue(), closePrice.floatValue());
+                }
             }
 
         in.close();

@@ -2,7 +2,6 @@ package com.company.gui;
 
 import com.company.JsonParser;
 import com.company.ReportGeneratorArrayList;
-import com.company.ReportGeneratorArrayList;
 import com.company.ReportGeneratorHashMap;
 
 import javax.swing.*;
@@ -32,9 +31,13 @@ public class Gui {
     private JLabel jl_highest;
     private JLabel jl_lowest;
     private JLabel jl_lignes;
+    private JRadioButton rb_arrayList;
+    private JRadioButton rb_hashMap;
+    private JLabel jl_structure;
     public int goodCode = 4947; // par défaut le code de l'or est sélectionné
     public String dateStart;
     public String dateEnd;
+    private boolean choix;
 
     public Gui() {
         // peupler liste des biens
@@ -102,21 +105,29 @@ public class Gui {
                         String url = "https://www.zonebourse.com/mods_a/charts/TV/function/history?from=" + millisecondsStart +
                                 "&to=" + millisecondsEnd + "&symbol=" + goodCode + "&resolution=D&requestType=GET&src=itfp";
 
-                        //jl_url.setText(url);
+                        if (rb_arrayList.isSelected()){
+                            choix = true;
+                        }else{
+                            choix = false;
+                        }
 
                         JsonParser RecupUrl = new JsonParser();
-                        RecupUrl.addHistory(url);
+                        RecupUrl.addHistory(url, choix);
 
-                    /*jl_open.setText(String.valueOf(ReportGeneratorArrayList.getOpen()));
-                    jl_close.setText(String.valueOf(ReportGeneratorArrayList.getClose()));
-                    jl_highest.setText(String.valueOf(ReportGeneratorArrayList.getHighest()));
-                    jl_lowest.setText(String.valueOf(ReportGeneratorArrayList.getLowest()));
-                    jl_lignes.setText(ReportGeneratorArrayList.goodPrices.size() + " lignes"); */
-
-                        jl_open.setText(String.valueOf(ReportGeneratorHashMap.getOpen()));
-                        jl_close.setText(String.valueOf(ReportGeneratorHashMap.getClose()));
-                        jl_highest.setText(String.valueOf(ReportGeneratorHashMap.getHighest()));
-                        jl_lowest.setText(String.valueOf(ReportGeneratorHashMap.getLowest()));
+                        if (choix){
+                            jl_open.setText(String.valueOf(ReportGeneratorArrayList.getOpen()));
+                            jl_close.setText(String.valueOf(ReportGeneratorArrayList.getClose()));
+                            jl_highest.setText(String.valueOf(ReportGeneratorArrayList.getHighest()));
+                            jl_lowest.setText(String.valueOf(ReportGeneratorArrayList.getLowest()));
+                            jl_lignes.setText(ReportGeneratorArrayList.goodPrices.size() + " lignes");
+                            jl_structure.setText("ArrayList");
+                        } else {
+                            jl_open.setText(String.valueOf(ReportGeneratorHashMap.getOpen()));
+                            jl_close.setText(String.valueOf(ReportGeneratorHashMap.getClose()));
+                            jl_highest.setText(String.valueOf(ReportGeneratorHashMap.getHighest()));
+                            jl_lowest.setText(String.valueOf(ReportGeneratorHashMap.getLowest()));
+                            jl_structure.setText("HashMap");
+                        }
                     }
                 }
             }
