@@ -7,6 +7,10 @@ import java.util.*;
 
 public class ReportGeneratorHashMap {
     private static HashMap<Date, GoodPriceSummary> goodPrices = null;
+    public static float openPrice;
+    public static float closePrice;
+    public static float highestPrice;
+    public static float lowestPrice;
 
     public ReportGeneratorHashMap() {
         goodPrices = new HashMap<>(101);
@@ -17,61 +21,63 @@ public class ReportGeneratorHashMap {
         goodPrices.put(date,goodPrice);
     }
 
-    public static float getOpen() {
-        Timestamp stamp = new Timestamp(System.currentTimeMillis() * 1000);
-        Date firstDate = new Date(stamp.getTime());
+    //cette methode est cree pour eviter de faire 4 fois la meme boucle dans chaque methode de calcul, ainsi gagner en rapidite
+    public void getCalcul() {
+        // variable pour getOpen
+        Timestamp stampGetOpen = new Timestamp(System.currentTimeMillis() * 1000);
+        Date firstDate = new Date(stampGetOpen.getTime());
+        //variable pour getClose
+        Timestamp stampGetClose = new Timestamp(0);
+        Date lastDate = new Date(stampGetClose.getTime());
+        //variable pour getHighest
+        float theHighest = 0;
+        //variable pour getLowest
+        //prend un lowestprice aleatoire pour le comparer aux autres valeurs
+        float theLowest = goodPrices.get(goodPrices.keySet().toArray()[0]).getLowestPrice() ;
 
+        //boucle sur toutes "lignes de données" et appel les 4 methodes
         for(Map.Entry<Date, GoodPriceSummary> entry : goodPrices.entrySet()) {
-            Date key = entry.getKey();
+            firstDate = getOpen(firstDate, entry.getKey());
+            lastDate = getClose(lastDate, entry.getKey());
+            theHighest = getHighest(theHighest, entry.getValue().getHighestPrice());
+            theLowest = getLowest(theLowest, entry.getValue().getLowestPrice());
 
-            if ((firstDate.compareTo(key)) > 0) {
-                firstDate = key;
-            } else if (firstDate.compareTo(key) == 0){
-                System.out.println("Erreur dans la réception du JSON Parser, deux dates sont égales dans le JSON parser. Veuillez relancer");
-            }
         }
-        return goodPrices.get(firstDate).getOpenPrice();
+        //attribue les resultats aux variables static
+        openPrice = goodPrices.get(firstDate).getOpenPrice();
+        closePrice = goodPrices.get(lastDate).getClosePrice();
+        highestPrice = theHighest;
+        lowestPrice = theLowest;
     }
 
-    public static float getClose() {
-        Timestamp stamp = new Timestamp(0);
-        Date lastDate = new Date(stamp.getTime());
-
-        for(Map.Entry<Date, GoodPriceSummary> entry : goodPrices.entrySet()) {
-            Date key = entry.getKey();
-
-            if ((lastDate.compareTo(key)) < 0) {
-                lastDate = key;
-            } else if (lastDate.compareTo(key) == 0){
-                System.out.println("Erreur dans la réception du JSON Parser, deux dates sont égales dans le JSON parser. Veuillez relancer");
-            }
+    public Date getOpen(Date firstDate, Date key) {
+        if ((firstDate.compareTo(key)) > 0) {
+            firstDate = key;
         }
-        return goodPrices.get(lastDate).getClosePrice();
+        return firstDate;
     }
 
-    public static float getHighest() {
-        float highest = 0;
-
-        for(Map.Entry<Date, GoodPriceSummary> entry : goodPrices.entrySet()) {
-            float highestPriceValue = entry.getValue().getHighestPrice();
-
-            if (highestPriceValue > highest) {
-                highest = highestPriceValue;
-            }
+    public Date getClose(Date lastDate, Date key ) {
+        if ((lastDate.compareTo(key)) < 0) {
+            lastDate = key;
+        } else if (lastDate.compareTo(key) == 0){
+            System.out.println("Erreur dans la réception du JSON Parser, deux dates sont égales dans le JSON parser. Veuillez relancer");
         }
-        return highest;
+        return lastDate;
     }
 
-    public static float getLowest() {
-        float lowest = goodPrices.get(goodPrices.keySet().toArray()[0]).getLowestPrice() ;
-
-        for(Map.Entry<Date, GoodPriceSummary> entry : goodPrices.entrySet()) {
-            float lowestPriceValue = entry.getValue().getLowestPrice();
-
-            if (lowestPriceValue < lowest) {
-                lowest = lowestPriceValue;
-            }
+    public float getHighest(float theHighest, float highestPriceValue) {
+        if (highestPriceValue > theHighest) {
+            theHighest = highestPriceValue;
         }
-        return lowest;
+        return theHighest;
+    }
+
+    public float getLowest(float theLowest, float lowestPriceValue) {
+
+        if (lowestPriceValue < theLowest) {
+            theLowest = lowestPriceValue;
+        }
+        return theLowest;
     }
 }

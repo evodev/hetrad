@@ -10,6 +10,10 @@ public class ReportGeneratorArrayList {
     // remettre en private pour la version finale
     // goodPrices doit être en public pour pouvoir afficher le nombre de lignes dans le Gui
     public static ArrayList<GoodPriceSummary> goodPrices = null;
+    public static float openPrice;
+    public static float closePrice;
+    public static float highestPrice;
+    public static float lowestPrice;
 
     public ReportGeneratorArrayList() {
         goodPrices = new ArrayList<>();
@@ -21,31 +25,31 @@ public class ReportGeneratorArrayList {
         goodPrices.add(goodPrice);
     }
 
-    public static float getOpen() {
-        return goodPrices.get(0).getOpenPrice();
+    public void getOpen() {
+        openPrice = goodPrices.get(0).getOpenPrice();
     }
 
-    public static float getClose() {
-        return goodPrices.get(goodPrices.size()-1).getClosePrice();
+    public void getClose() {
+        closePrice = goodPrices.get(goodPrices.size()-1).getClosePrice();
     }
 
-    public static float getHighest(){
+    public void getHighest(){
         float highest = 0;
         for (int i=0; i < goodPrices.size(); i++){
             if (highest < goodPrices.get(i).getHighestPrice()){
                 highest = goodPrices.get(i).getHighestPrice();
             }
         }
-        return highest;
+        highestPrice = highest;
     }
 
-    public static float getLowest(){
+    public void getLowest(){
         float lowest = goodPrices.get(0).getLowestPrice();
         for (int i=1; i< goodPrices.size(); i++){
             if ( lowest > goodPrices.get(i).getLowestPrice()){
                 lowest = goodPrices.get(i).getLowestPrice();
             }
         }
-        return lowest;
+        lowestPrice = lowest;
     }
 }

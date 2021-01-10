@@ -115,17 +115,17 @@ public class Gui {
                         RecupUrl.addHistory(url, choix);
 
                         if (choix){
-                            jl_open.setText(String.valueOf(ReportGeneratorArrayList.getOpen()));
-                            jl_close.setText(String.valueOf(ReportGeneratorArrayList.getClose()));
-                            jl_highest.setText(String.valueOf(ReportGeneratorArrayList.getHighest()));
-                            jl_lowest.setText(String.valueOf(ReportGeneratorArrayList.getLowest()));
+                            jl_open.setText(String.valueOf(ReportGeneratorArrayList.openPrice));
+                            jl_close.setText(String.valueOf(ReportGeneratorArrayList.closePrice));
+                            jl_highest.setText(String.valueOf(ReportGeneratorArrayList.highestPrice));
+                            jl_lowest.setText(String.valueOf(ReportGeneratorArrayList.lowestPrice));
                             jl_lignes.setText(ReportGeneratorArrayList.goodPrices.size() + " lignes");
                             jl_structure.setText("ArrayList");
                         } else {
-                            jl_open.setText(String.valueOf(ReportGeneratorHashMap.getOpen()));
-                            jl_close.setText(String.valueOf(ReportGeneratorHashMap.getClose()));
-                            jl_highest.setText(String.valueOf(ReportGeneratorHashMap.getHighest()));
-                            jl_lowest.setText(String.valueOf(ReportGeneratorHashMap.getLowest()));
+                            jl_open.setText(String.valueOf(ReportGeneratorHashMap.openPrice));
+                            jl_close.setText(String.valueOf(ReportGeneratorHashMap.closePrice));
+                            jl_highest.setText(String.valueOf(ReportGeneratorHashMap.highestPrice));
+                            jl_lowest.setText(String.valueOf(ReportGeneratorHashMap.lowestPrice));
                             jl_structure.setText("HashMap");
                         }
                     }

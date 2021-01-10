@@ -63,8 +63,13 @@ public class JsonParser {
 
                 if (choix){
                     reportGeneratorArrayList.addGoodPrice(date, volume.floatValue(), highestPrice.floatValue(), lowestPrice.floatValue(), openPrice.floatValue(), closePrice.floatValue());
+                    reportGeneratorArrayList.getOpen();
+                    reportGeneratorArrayList.getClose();
+                    reportGeneratorArrayList.getHighest();
+                    reportGeneratorArrayList.getLowest();
                 }else{
                     reportGeneratorHashMap.addGoodPrice(date, volume.floatValue(), highestPrice.floatValue(), lowestPrice.floatValue(), openPrice.floatValue(), closePrice.floatValue());
+                    reportGeneratorHashMap.getCalcul();
                 }
             }
 
