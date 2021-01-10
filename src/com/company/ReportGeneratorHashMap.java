@@ -33,7 +33,7 @@ public class ReportGeneratorHashMap {
         float theHighest = 0;
         //variable pour getLowest
         //prend un lowestprice aleatoire pour le comparer aux autres valeurs
-        float theLowest = goodPrices.get(goodPrices.keySet().toArray()[0]).getLowestPrice() ;
+        float theLowest = Float.MAX_VALUE ;
 
         //boucle sur toutes "lignes de données" et appel les 4 methodes
         for(Map.Entry<Date, GoodPriceSummary> entry : goodPrices.entrySet()) {
