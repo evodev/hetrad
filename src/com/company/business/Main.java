@@ -1,4 +1,4 @@
-package com.company;
+package com.company.business;
 
 
 import com.company.gui.Gui;

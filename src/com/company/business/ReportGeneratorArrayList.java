@@ -1,11 +1,11 @@
-package com.company;
+package com.company.business;
 
-import com.company.business.GoodPriceSummary;
+import com.company.goods.GoodPriceSummary;
 
 import java.util.ArrayList;
 import java.util.Date;
 
-public class ReportGeneratorArrayList {
+public class ReportGeneratorArrayList extends AbstractReportGenerator{
 
     // remettre en private pour la version finale
     // goodPrices doit être en public pour pouvoir afficher le nombre de lignes dans le Gui
@@ -25,14 +25,17 @@ public class ReportGeneratorArrayList {
         goodPrices.add(goodPrice);
     }
 
+    @Override
     public void getOpen() {
         openPrice = goodPrices.get(0).getOpenPrice();
     }
 
+    @Override
     public void getClose() {
         closePrice = goodPrices.get(goodPrices.size()-1).getClosePrice();
     }
 
+    @Override
     public void getHighest(){
         float highest = 0;
         for (int i=0; i < goodPrices.size(); i++){
@@ -43,6 +46,7 @@ public class ReportGeneratorArrayList {
         highestPrice = highest;
     }
 
+    @Override
     public void getLowest(){
         float lowest = goodPrices.get(0).getLowestPrice();
         for (int i=1; i< goodPrices.size(); i++){

@@ -1,11 +1,10 @@
 package com.company.gui;
 
-import com.company.JsonParser;
-import com.company.ReportGeneratorArrayList;
-import com.company.ReportGeneratorHashMap;
+import com.company.business.JsonParser;
+import com.company.business.ReportGeneratorArrayList;
+import com.company.business.ReportGeneratorHashMap;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;

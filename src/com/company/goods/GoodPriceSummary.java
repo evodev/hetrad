@@ -1,4 +1,4 @@
-package com.company.business;
+package com.company.goods;
 
 import java.util.Date;
 
