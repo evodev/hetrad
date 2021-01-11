@@ -68,12 +68,9 @@ public class JsonParser {
                 }
             }
             if (choix){
-                reportGeneratorArrayList.getOpen();
-                reportGeneratorArrayList.getClose();
-                reportGeneratorArrayList.getHighest();
-                reportGeneratorArrayList.getLowest();
+                reportGeneratorArrayList.getReport();
             }else{
-                reportGeneratorHashMap.getCalcul();
+                reportGeneratorHashMap.getReport();
             }
 
         in.close();

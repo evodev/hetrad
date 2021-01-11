@@ -1,5 +1,6 @@
 package com.company.gui;
 
+import com.company.business.AbstractReportGenerator;
 import com.company.business.JsonParser;
 import com.company.business.ReportGeneratorArrayList;
 import com.company.business.ReportGeneratorHashMap;
@@ -113,20 +114,10 @@ public class Gui {
                         JsonParser RecupUrl = new JsonParser();
                         RecupUrl.addHistory(url, choix);
 
-                        if (choix){
-                            jl_open.setText(String.valueOf(ReportGeneratorArrayList.openPrice));
-                            jl_close.setText(String.valueOf(ReportGeneratorArrayList.closePrice));
-                            jl_highest.setText(String.valueOf(ReportGeneratorArrayList.highestPrice));
-                            jl_lowest.setText(String.valueOf(ReportGeneratorArrayList.lowestPrice));
-                            jl_lignes.setText(ReportGeneratorArrayList.goodPrices.size() + " lignes");
-                            jl_structure.setText("ArrayList");
-                        } else {
-                            jl_open.setText(String.valueOf(ReportGeneratorHashMap.openPrice));
-                            jl_close.setText(String.valueOf(ReportGeneratorHashMap.closePrice));
-                            jl_highest.setText(String.valueOf(ReportGeneratorHashMap.highestPrice));
-                            jl_lowest.setText(String.valueOf(ReportGeneratorHashMap.lowestPrice));
-                            jl_structure.setText("HashMap");
-                        }
+                        jl_open.setText(String.valueOf(AbstractReportGenerator.openPrice));
+                        jl_close.setText(String.valueOf(AbstractReportGenerator.closePrice));
+                        jl_highest.setText(String.valueOf(AbstractReportGenerator.highestPrice));
+                        jl_lowest.setText(String.valueOf(AbstractReportGenerator.lowestPrice));
                     }
                 }
             }
