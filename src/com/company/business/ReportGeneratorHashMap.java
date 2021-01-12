@@ -7,7 +7,7 @@ import java.util.*;
 
 public class ReportGeneratorHashMap extends AbstractReportGenerator {
 
-    private HashMap<Date, GoodPriceSummary> goodPrices = null;
+    private HashMap<Date, GoodPriceSummary> goodPrices;
     // variable pour getOpen
     private Timestamp stampGetOpen = new Timestamp(System.currentTimeMillis() * 1000);
     private Date firstDate;
@@ -34,35 +34,35 @@ public class ReportGeneratorHashMap extends AbstractReportGenerator {
 
         //boucle sur toutes "lignes de données" et appel les 4 methodes
         for(Map.Entry<Date, GoodPriceSummary> entry : goodPrices.entrySet()) {
-            getOpen(entry.getKey());
-            getClose(entry.getKey());
-            getHighest(entry.getValue().getHighestPrice());
-            getLowest(entry.getValue().getLowestPrice());
+            setOpenDate(entry.getKey());
+            setCloseDate(entry.getKey());
+            setHighest(entry.getValue().getHighestPrice());
+            setLowest(entry.getValue().getLowestPrice());
         }
         //attribue les resultats aux variables static
         setOpenPrice(goodPrices.get(firstDate).getOpenPrice());
         setClosePrice(goodPrices.get(lastDate).getClosePrice());
     }
 
-    public void getOpen(Date key) {
+    public void setOpenDate(Date key) {
         if ((firstDate.compareTo(key)) > 0) {
             firstDate = key;
         }
     }
 
-    public void getClose(Date key ) {
+    public void setCloseDate(Date key ) {
         if ((lastDate.compareTo(key)) < 0) {
             lastDate = key;
         }
     }
 
-    public void getHighest(float highestPriceValue) {
+    public void setHighest(float highestPriceValue) {
         if (highestPriceValue > getHighestPrice()) {
             setHighestPrice(highestPriceValue);
         }
     }
 
-    public void getLowest(float lowestPriceValue) {
+    public void setLowest(float lowestPriceValue) {
         if (lowestPriceValue < getLowestPrice()) {
             setLowestPrice(lowestPriceValue);
         }

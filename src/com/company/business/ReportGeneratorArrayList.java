@@ -7,7 +7,7 @@ import java.util.Date;
 
 public class ReportGeneratorArrayList extends AbstractReportGenerator{
 
-    private ArrayList<GoodPriceSummary> goodPrices = null;
+    private ArrayList<GoodPriceSummary> goodPrices;
 
     public ReportGeneratorArrayList() {
         //reinitialise la ArrayList lorsqu'on appuie sur le bouton rapport, pour ne pas interferer avec les anciennes valeurs
@@ -22,29 +22,29 @@ public class ReportGeneratorArrayList extends AbstractReportGenerator{
 
     @Override
     public void getReport() {
-        getOpen();
-        getClose();
+        setOpen();
+        setClose();
         for (int i=0; i< goodPrices.size(); i++) {
-            getHighest(i);
-            getLowest(i);
+            setHighest(i);
+            setLowest(i);
         }
     }
 
-    public void getOpen() {
+    public void setOpen() {
         setOpenPrice(goodPrices.get(0).getOpenPrice());
     }
 
-    public void getClose() {
+    public void setClose() {
         setClosePrice(goodPrices.get(goodPrices.size()-1).getClosePrice());
     }
 
-    public void getHighest(int i){
+    public void setHighest(int i){
         if (getHighestPrice() < goodPrices.get(i).getHighestPrice()){
             setHighestPrice(goodPrices.get(i).getHighestPrice());
         }
     }
 
-    public void getLowest(int i){
+    public void setLowest(int i){
         if ( getLowestPrice() > goodPrices.get(i).getLowestPrice()){
             setLowestPrice(goodPrices.get(i).getLowestPrice());
         }
