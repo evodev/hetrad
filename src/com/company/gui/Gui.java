@@ -112,12 +112,27 @@ public class Gui {
                         }
 
                         JsonParser RecupUrl = new JsonParser();
-                        RecupUrl.addHistory(url, choix);
 
-                        jl_open.setText(String.valueOf(AbstractReportGenerator.openPrice));
-                        jl_close.setText(String.valueOf(AbstractReportGenerator.closePrice));
-                        jl_highest.setText(String.valueOf(AbstractReportGenerator.highestPrice));
-                        jl_lowest.setText(String.valueOf(AbstractReportGenerator.lowestPrice));
+                        if (choix){
+                            AbstractReportGenerator reportGeneratorArrayList = new ReportGeneratorArrayList();
+
+                            RecupUrl.addHistory(url, reportGeneratorArrayList);
+
+                            jl_open.setText(String.valueOf(reportGeneratorArrayList.getOpenPrice()));
+                            jl_close.setText(String.valueOf(reportGeneratorArrayList.getClosePrice()));
+                            jl_highest.setText(String.valueOf(reportGeneratorArrayList.getHighestPrice()));
+                            jl_lowest.setText(String.valueOf(reportGeneratorArrayList.getLowestPrice()));
+                        } else {
+                            AbstractReportGenerator reportGeneratorHashMap = new ReportGeneratorHashMap();
+
+                            RecupUrl.addHistory(url, reportGeneratorHashMap);
+
+                            jl_open.setText(String.valueOf(reportGeneratorHashMap.getOpenPrice()));
+                            jl_close.setText(String.valueOf(reportGeneratorHashMap.getClosePrice()));
+                            jl_highest.setText(String.valueOf(reportGeneratorHashMap.getHighestPrice()));
+                            jl_lowest.setText(String.valueOf(reportGeneratorHashMap.getLowestPrice()));
+                        }
+
                     }
                 }
             }

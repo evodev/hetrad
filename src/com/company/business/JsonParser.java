@@ -20,10 +20,8 @@ public class JsonParser {
     public JsonParser () {
     }
 
-    public void addHistory(String pUrl, boolean choix) {
+    public void addHistory(String pUrl, AbstractReportGenerator reportGenerator) {
         JSONParser parser = new JSONParser();
-        ReportGeneratorArrayList reportGeneratorArrayList = new ReportGeneratorArrayList();
-        ReportGeneratorHashMap reportGeneratorHashMap = new ReportGeneratorHashMap();
 
         try {
             // récupération URL de l'API
@@ -60,18 +58,11 @@ public class JsonParser {
                 Timestamp stamp = new Timestamp(time);
                 Date date = new Date(stamp.getTime());
 
-                if (choix){
-                    reportGeneratorArrayList.addGoodPrice(date, volume.floatValue(), highestPrice.floatValue(), lowestPrice.floatValue(), openPrice.floatValue(), closePrice.floatValue());
-                }else{
-                    reportGeneratorHashMap.addGoodPrice(date, volume.floatValue(), highestPrice.floatValue(), lowestPrice.floatValue(), openPrice.floatValue(), closePrice.floatValue());
-
-                }
+                //ajoute pour chaques jours, la date et les détails sur la valeur d'une action
+                reportGenerator.addGoodPrice(date, volume.floatValue(), highestPrice.floatValue(), lowestPrice.floatValue(), openPrice.floatValue(), closePrice.floatValue());
             }
-            if (choix){
-                reportGeneratorArrayList.getReport();
-            }else{
-                reportGeneratorHashMap.getReport();
-            }
+            //enclenche la méthode qui calcul la prix d'ouverture, de fermeture, la plus haute et laplus basse
+            reportGenerator.getReport();
 
         in.close();
         } catch(NullPointerException e) {

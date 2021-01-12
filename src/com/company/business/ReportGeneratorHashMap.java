@@ -6,23 +6,23 @@ import java.sql.Timestamp;
 import java.util.*;
 
 public class ReportGeneratorHashMap extends AbstractReportGenerator {
-    private static HashMap<Date, GoodPriceSummary> goodPrices = null;
+
+    private HashMap<Date, GoodPriceSummary> goodPrices = null;
     // variable pour getOpen
-    Timestamp stampGetOpen = new Timestamp(System.currentTimeMillis() * 1000);
-    Date firstDate;
+    private Timestamp stampGetOpen = new Timestamp(System.currentTimeMillis() * 1000);
+    private Date firstDate;
     //variable pour getClose
-    Timestamp stampGetClose = new Timestamp(0);
-    Date lastDate;
+    private Timestamp stampGetClose = new Timestamp(0);
+    private Date lastDate;
 
     public ReportGeneratorHashMap() {
         //reinitialise les variables lorsqu'on appuie sur le bouton rapport, pour ne pas interferer avec les anciennes valeurs
         goodPrices = new HashMap<>(101);
         firstDate = new Date(stampGetOpen.getTime());
         lastDate = new Date(stampGetClose.getTime());
-        super.highestPrice = 0;
-        super.lowestPrice = Float.MAX_VALUE;
-    }
 
+    }
+    @Override
     public void addGoodPrice(Date date, float volume, float highestPrice, float lowestPrice, float openPrice, float closePrice) {
         GoodPriceSummary goodPrice = new GoodPriceSummary(date, volume, highestPrice, lowestPrice, openPrice, closePrice);
         goodPrices.put(date,goodPrice);
@@ -40,8 +40,8 @@ public class ReportGeneratorHashMap extends AbstractReportGenerator {
             getLowest(entry.getValue().getLowestPrice());
         }
         //attribue les resultats aux variables static
-        super.openPrice = goodPrices.get(firstDate).getOpenPrice();
-        super.closePrice = goodPrices.get(lastDate).getClosePrice();
+        setOpenPrice(goodPrices.get(firstDate).getOpenPrice());
+        setClosePrice(goodPrices.get(lastDate).getClosePrice());
     }
 
     public void getOpen(Date key) {
@@ -57,14 +57,14 @@ public class ReportGeneratorHashMap extends AbstractReportGenerator {
     }
 
     public void getHighest(float highestPriceValue) {
-        if (highestPriceValue > super.highestPrice) {
-            super.highestPrice = highestPriceValue;
+        if (highestPriceValue > getHighestPrice()) {
+            setHighestPrice(highestPriceValue);
         }
     }
 
     public void getLowest(float lowestPriceValue) {
-        if (lowestPriceValue < super.lowestPrice) {
-            super.lowestPrice = lowestPriceValue;
+        if (lowestPriceValue < getLowestPrice()) {
+            setLowestPrice(lowestPriceValue);
         }
     }
 }
