@@ -52,6 +52,4 @@ public abstract class AbstractReportGenerator {
     public abstract void getReport();
 
     public abstract void addGoodPrice(Date date, float volume, float highestPrice, float lowestPrice, float openPrice, float closePrice);
-
-
 }
