@@ -2,7 +2,9 @@ package com.company.business;
 
 import com.company.goods.GoodPriceSummary;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 
 public class ReportGeneratorArrayList extends AbstractReportGenerator{

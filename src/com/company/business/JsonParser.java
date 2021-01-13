@@ -22,7 +22,6 @@ public class JsonParser {
 
     public void addHistory(String pUrl, AbstractReportGenerator reportGenerator) {
         JSONParser parser = new JSONParser();
-
         try {
             // récupération URL de l'API
             URL oracle = new URL(pUrl); // URL to Parse
@@ -61,8 +60,17 @@ public class JsonParser {
                 //ajoute pour chaques jours, la date et les détails sur la valeur d'une action
                 reportGenerator.addGoodPrice(date, volume.floatValue(), highestPrice.floatValue(), lowestPrice.floatValue(), openPrice.floatValue(), closePrice.floatValue());
             }
+
+            /** analyse experimentale du temps pour le getReport de toutes les lignes
+            * je laisse les lignes d'analyse en commentaire volontairement pour que Max puisse voir comment on a calcule
+            * long startTimeGetReport = System.currentTimeMillis();*/
+
             //enclenche la méthode qui calcul la prix d'ouverture, de fermeture, la plus haute et laplus basse
             reportGenerator.getReport();
+
+            /** long endTimeGetReport = System.currentTimeMillis();
+            * long elaspedGetReport = endTimeGetReport - startTimeGetReport;
+            * System.out.println("temps pour getReport pour toutes les lignes: " + elaspedGetReport);*/
 
         in.close();
         } catch(NullPointerException e) {
@@ -74,9 +82,6 @@ public class JsonParser {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-    }
-
-    public void addLatest(String url){
     }
 
     private static Double toDouble (Object object){
