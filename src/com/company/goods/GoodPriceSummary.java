@@ -22,6 +22,7 @@ public class GoodPriceSummary {
         this.closePrice = closePrice;
     }
 
+    /* On décide de garder les méthodes non utilisés pour les bests practice et dans le cas d'une suite du projet */
     public Date getTime() {
         return time;
     }

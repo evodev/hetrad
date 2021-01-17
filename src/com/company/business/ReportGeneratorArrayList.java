@@ -2,9 +2,7 @@ package com.company.business;
 
 import com.company.goods.GoodPriceSummary;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 
 public class ReportGeneratorArrayList extends AbstractReportGenerator{
@@ -12,7 +10,7 @@ public class ReportGeneratorArrayList extends AbstractReportGenerator{
     private ArrayList<GoodPriceSummary> goodPrices;
 
     public ReportGeneratorArrayList() {
-        //reinitialise la ArrayList lorsqu'on appuie sur le bouton rapport, pour ne pas interferer avec les anciennes valeurs
+        //reénitialise la ArrayList lorsqu'on appuie sur le bouton rapport, pour ne pas interférer avec les anciennes valeurs
         goodPrices = new ArrayList<>();
     }
 

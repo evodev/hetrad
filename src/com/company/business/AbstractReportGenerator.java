@@ -1,8 +1,7 @@
 package com.company.business;
 
-import java.util.Date;
 
-public abstract class AbstractReportGenerator {
+public abstract class AbstractReportGenerator implements ReportGenerator {
     protected float openPrice;
     protected float closePrice;
     protected float highestPrice;
@@ -17,39 +16,43 @@ public abstract class AbstractReportGenerator {
         setLowestPrice(Float.MAX_VALUE);
     }
 
+    @Override
     public float getOpenPrice() {
         return openPrice;
     }
 
+    @Override
     public void setOpenPrice(float openPrice) {
         this.openPrice = openPrice;
     }
 
+    @Override
     public float getClosePrice() {
         return closePrice;
     }
 
+    @Override
     public void setClosePrice(float closePrice) {
         this.closePrice = closePrice;
     }
 
+    @Override
     public float getHighestPrice() {
         return highestPrice;
     }
 
+    @Override
     public void setHighestPrice(float highestPrice) {
         this.highestPrice = highestPrice;
     }
 
+    @Override
     public float getLowestPrice() {
         return lowestPrice;
     }
 
+    @Override
     public void setLowestPrice(float lowestPrice) {
         this.lowestPrice = lowestPrice;
     }
-
-    public abstract void getReport();
-
-    public abstract void addGoodPrice(Date date, float volume, float highestPrice, float lowestPrice, float openPrice, float closePrice);
 }

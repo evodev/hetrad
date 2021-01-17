@@ -16,7 +16,7 @@ public class ReportGeneratorHashMap extends AbstractReportGenerator {
     private Date lastDate;
 
     public ReportGeneratorHashMap() {
-        //reinitialise les variables lorsqu'on appuie sur le bouton rapport, pour ne pas interferer avec les anciennes valeurs
+        //réinitialise les variables lorsqu'on appuie sur le bouton rapport, pour ne pas interférer avec les anciennes valeurs
         goodPrices = new HashMap<>(101);
         firstDate = new Date(stampGetOpen.getTime());
         lastDate = new Date(stampGetClose.getTime());
@@ -28,18 +28,17 @@ public class ReportGeneratorHashMap extends AbstractReportGenerator {
         goodPrices.put(date,goodPrice);
     }
 
-    //cette methode est cree pour eviter de faire 4 fois la meme boucle dans chaque methode de calcul, ainsi gagner en rapidite
+    //cette méthode est crée pour éviter de faire 4 fois la meme boucle dans chaque méthode de calcul, ainsi gagner en rapidité
     @Override
     public void getReport() {
-
-        //boucle sur toutes "lignes de données" et appel les 4 methodes
+        //boucle sur toutes "lignes de données" et appel les 4 méthodes
         for(Map.Entry<Date, GoodPriceSummary> entry : goodPrices.entrySet()) {
             setOpenDate(entry.getKey());
             setCloseDate(entry.getKey());
             setHighest(entry.getValue().getHighestPrice());
             setLowest(entry.getValue().getLowestPrice());
         }
-        //attribue les resultats aux variables static
+        //attribue les résultats aux variables static
         setOpenPrice(goodPrices.get(firstDate).getOpenPrice());
         setClosePrice(goodPrices.get(lastDate).getClosePrice());
     }
