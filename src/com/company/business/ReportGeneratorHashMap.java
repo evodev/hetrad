@@ -39,8 +39,8 @@ public class ReportGeneratorHashMap extends AbstractReportGenerator {
             setLowest(entry.getValue().getLowestPrice());
         }
         //attribue les résultats aux variables static
-        setOpenPrice(goodPrices.get(firstDate).getOpenPrice());
-        setClosePrice(goodPrices.get(lastDate).getClosePrice());
+        super.setOpenPrice(goodPrices.get(firstDate).getOpenPrice());
+        super.setClosePrice(goodPrices.get(lastDate).getClosePrice());
     }
 
     public void setOpenDate(Date key) {
@@ -57,13 +57,13 @@ public class ReportGeneratorHashMap extends AbstractReportGenerator {
 
     public void setHighest(float highestPriceValue) {
         if (highestPriceValue > getHighestPrice()) {
-            setHighestPrice(highestPriceValue);
+            super.setHighestPrice(highestPriceValue);
         }
     }
 
     public void setLowest(float lowestPriceValue) {
         if (lowestPriceValue < getLowestPrice()) {
-            setLowestPrice(lowestPriceValue);
+            super.setLowestPrice(lowestPriceValue);
         }
     }
 }

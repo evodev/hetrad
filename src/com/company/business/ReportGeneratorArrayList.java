@@ -31,22 +31,22 @@ public class ReportGeneratorArrayList extends AbstractReportGenerator{
     }
 
     public void setOpen() {
-        setOpenPrice(goodPrices.get(0).getOpenPrice());
+        super.setOpenPrice(goodPrices.get(0).getOpenPrice());
     }
 
     public void setClose() {
-        setClosePrice(goodPrices.get(goodPrices.size()-1).getClosePrice());
+        super.setClosePrice(goodPrices.get(goodPrices.size()-1).getClosePrice());
     }
 
     public void setHighest(int i){
         if (getHighestPrice() < goodPrices.get(i).getHighestPrice()){
-            setHighestPrice(goodPrices.get(i).getHighestPrice());
+            super.setHighestPrice(goodPrices.get(i).getHighestPrice());
         }
     }
 
     public void setLowest(int i){
         if ( getLowestPrice() > goodPrices.get(i).getLowestPrice()){
-            setLowestPrice(goodPrices.get(i).getLowestPrice());
+            super.setLowestPrice(goodPrices.get(i).getLowestPrice());
         }
     }
 }
